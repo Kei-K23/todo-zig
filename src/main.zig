@@ -17,3 +17,16 @@ pub fn main() !void {
 
     try stdOut.print("Todo List CLI - Zig (Version : {s})\n", .{version});
 }
+
+fn addTask(title: []const u8) !void {
+    const new_task = Task{ .id = @intCast(tasks.items.len + 1), .title = title, .completed = false };
+
+    // Add to tasks array list
+    try tasks.append(new_task);
+}
+
+fn listTasks() !void {
+    for (tasks.items) |task| {
+        std.debug.print("ID: {d}, Title: {s}, Completed: {s}\n", .{task.id}, .{task.title}, .{task.completed});
+    }
+}
